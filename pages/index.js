@@ -17,6 +17,14 @@ export default function Home() {
     // clear input
     setInput('');
   };
+
+  const deleteTodo = (id) => {
+    // filter out todo with the id
+    const newList = list.filter((todo) => todo.id !== id);
+
+    setList(newList);
+  };
+
   return (
     <div className={styles.container}>
       <h1>ToDo List</h1>
@@ -27,6 +35,15 @@ export default function Home() {
         // character that are typed-in and we'll set the value of hte input state variable, to those character.
       />
       <button onClick={() => addTodo(input)}>Add</button>
+
+      <ul>
+        {list.map((todo) => (
+          <li key={todo.id}>
+            {todo.todo}
+            <button onClick={() => deleteTodo(todo.id)}>x</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
